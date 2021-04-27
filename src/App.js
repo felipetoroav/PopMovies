@@ -9,10 +9,9 @@ import './App.css';
 
 class App extends React.Component {
   state = {
-    apiKey: 'c77aa4b1',
     loading: true,
     movies: [],
-    modalIsOpen: false,
+    // modalIsOpen: false,
     DefaultMovies: ["Spider-man+homecoming", "Batman", "Aquaman", "Shazam", "Avengers", "Avengers+infinity+war", "Antman", "Black+panter", "Wonder+woman", "Godzilla"],
   }
 
@@ -30,7 +29,7 @@ class App extends React.Component {
 
   fetchMovies = async (movie) => {
     try {
-      const response = await fetch(`http://www.omdbapi.com/?t=${movie}&apikey=${this.state.apiKey}`);
+      const response = await fetch(`http://www.omdbapi.com/?t=${movie}&apikey=c77aa4b1`);
       const data = await response.json();
       return data;
     } catch(error) {
@@ -38,22 +37,23 @@ class App extends React.Component {
     }
   }
 
-  handleOpenModal = e => {
-    this.setState({ modalIsOpen: true })
-  }
+  // handleOpenModal = e => {
+  //   this.setState({ modalIsOpen: true })
+  // }
 
-  handleCloseModal = e => {
-    this.setState({ modalIsOpen: false })
-  }
+  // handleCloseModal = e => {
+  //   this.setState({ modalIsOpen: false })
+  // }
 
   render() {
     return (
       <div className="App">
         <Header />
         <SerchMovie
-          openModal={this.handleOpenModal}
-          closeModal={this.handleCloseModal}
-          modalIsOpen={this.state.modalIsOpen}
+          // openModal={this.handleOpenModal}
+          // closeModal={this.handleCloseModal}
+          // modalIsOpen={this.state.modalIsOpen}
+          movies={this.state.DefaultMovies}
         />
         <MovieCard
           movies={this.state.movies}

@@ -1,7 +1,5 @@
 import React from 'react';
 
-import DetailsMovie from './DetailsMovie';
-
 import './styles/Header.css'
 
 function  Header() {

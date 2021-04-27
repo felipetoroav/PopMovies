@@ -1,52 +1,78 @@
 import React, { useEffect } from 'react';
 
 import Modal from './Modal';
+import Loading from './Loading';
 import './styles/DetailsMovie.css';
 
 function DetailsMovie(props) {
-  // const movie = props.queryMovie;
-  // const [queryMovie, setQueryMovie] = React.useState();
-  // console.log(movie, "hola")
+  const movie = props.movieQuery;
+  const [queryMovie, setQueryMovie] = React.useState();
+  const [loading, setLoading] = React.useState(true)
 
-  // const fetchData = async (movie) => {
-  //   try {
-  //     const response = await fetch(`http://www.omdbapi.com/?t=${movie}&apikey=c77aa4b1`);
-  //     const data = await response.json();
-  //     return data;
-  //   } catch(error) {
-  //     console.error(error)
-  //   }
-  // }
+  useEffect(() => {
+    if(movie === undefined || movie === "") {
+      return null
+    } else {
+      fetchData(movie)
+    }
+  }, [movie]);
 
-  return(
-    <Modal className="details__container"
-      isOpen={props.modalIsOpen}
-      onClose={props.closeModal}
-    >
-      <div className="details-img">
-        <img src="https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/media/imagenes/reportajes/los-20-posters-de-peliculas-mas-creativos/los-idus-de-marzo/7055664-1-esl-ES/LOS-IDUS-DE-MARZO.jpg" alt="Portada pelicula" />
-      </div>
-      <div className="details">
-        <div>
-          <div className="details-title">
-            <h2>Titulo de la elicula ome</h2>
-            <span>Type</span>
-          </div>
-          <div className="details-info">
-            <div>Ratings</div>
-            <div>Runtime</div>
-            <div>Year</div>
-          </div>
-          <div className="details-content">
-            <p>Plot</p>
-            <p>Director: Director</p>
-            <p>Genero: Genre</p>
-            <p>Actores: Actors</p>
+  const fetchData = async (movie) => {
+    if(movie === undefined || movie === "") {
+      return null
+    } else {
+      try {
+        const response = await fetch(`http://www.omdbapi.com/?t=${movie}&apikey=c77aa4b1`);
+        const data = await response.json();
+        setQueryMovie(data);
+        setLoading(false)
+      } catch(error) {
+        console.error(error);
+      }
+    }
+  }
+
+  // console.log(queryMovie)
+  // console.log(props.movieQuery)
+
+  if(loading === true) {
+    return (
+      <Modal>
+        <Loading />
+      </Modal>
+    )
+  } else {
+    return(
+      <Modal className="details__container"
+        isOpen={props.modalIsOpen}
+        onClose={props.closeModal}
+      >
+        <div className="details-img">
+          <img src={queryMovie.Poster} alt="Portada pelicula" />
+        </div>
+        <div className="details">
+          <div>
+            <div className="details-title">
+              <h2>{queryMovie.Title}</h2>
+              <span>{queryMovie.Type}</span>
+            </div>
+            <div className="details-info">
+              <div>{queryMovie.Ratings[0].Value}</div>
+              <div>{queryMovie.Runtime}</div>
+              <div>{queryMovie.Year}</div>
+            </div>
+            <div className="details-content">
+              <p>{queryMovie.Plot}</p>
+              <p>Director: {queryMovie.Director}</p>
+              <p>Genero: {queryMovie.Genre}</p>
+              <p>Actores: {queryMovie.Actors}</p>
+            </div>
           </div>
         </div>
-      </div>
-    </Modal>
-  )
+      </Modal>
+    )
+  }
+
 }
 
 export default DetailsMovie;

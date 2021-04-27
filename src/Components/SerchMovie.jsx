@@ -6,7 +6,17 @@ import './styles/SerchMovie.css'
 
 function SerchMovie(props) {
   const [query, setQuery] = React.useState("");
-  // const [modal, setModal ] = React.useState(true);
+  const [queryTest, setQueryTest] = React.useState("");
+  const [modalIsOpen, setModalIsOpen] = React.useState(false);
+
+  const handleOpenModal = e => {
+    setModalIsOpen(true)
+    setQueryTest(query)
+  }
+
+  const handleCloseModal = e => {
+    setModalIsOpen(false)
+  }
 
   return(
     <div>
@@ -20,12 +30,13 @@ function SerchMovie(props) {
         ></input>
         <button className="serch-button"
           type="submit"
-          onClick={props.openModal}
+          onClick={handleOpenModal}
         >Serch</button>
       </div>
       <DetailsMovie
-        modalIsOpen={props.modalIsOpen}
-        closeModal={props.closeModal}
+        movieQuery={queryTest}
+        modalIsOpen={modalIsOpen}
+        closeModal={handleCloseModal}
       />
     </div>
   )
