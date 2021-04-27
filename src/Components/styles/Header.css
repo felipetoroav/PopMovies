@@ -1,0 +1,19 @@
+.container__header {
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  background-color: black;
+  padding: 10px;
+}
+
+.header-logo h2 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.header-avatar img {
+  margin: 0 30px;
+  width: 40px;
+  border-radius: 50%;
+}

@@ -1,0 +1,48 @@
+.details__container {
+  width: 80%;
+  height: 100vh;
+  margin: auto;
+  padding-top: 50px;
+  flex-direction: row;
+}
+
+.details-img {
+  padding-right: 50px;
+}
+
+.details-img img {
+  width: 300px;
+  border-radius: 10px;
+}
+
+.details {
+  width: 100%;
+}
+
+.details-title {
+  display: flex;
+}
+
+.details-title h2 {
+  margin: 0;
+  font-size: 3rem;
+}
+
+.details-title span {
+  background: chocolate;
+  color: white;
+  margin-left: 20px;
+  padding: 2px 8px;
+  height: fit-content;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.details-info {
+  display: flex;
+  margin: 20px 0 20px 0;
+}
+
+.details-info div {
+  margin-right: 20px;
+}
